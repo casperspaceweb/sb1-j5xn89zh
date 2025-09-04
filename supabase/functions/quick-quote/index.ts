@@ -23,7 +23,7 @@ Deno.serve(async (req: Request) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `KEY=${API_KEY} SECRET=${API_SECRET}`,
+        'Authorization': `Bearer KEY=${API_KEY} SECRET=${API_SECRET}`,
       },
       body: JSON.stringify(requestData),
     });
