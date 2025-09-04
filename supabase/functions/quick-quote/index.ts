@@ -1,6 +1,7 @@
 import { corsHeaders } from '../_shared/cors.ts';
 
-const API_TOKEN = 'KEY=Qr6Ty8Pw3Nv1Az5Gh7Lc9BmK SECRET=S1dF2gH3jK4lM5nP6qR7tV8wX9yZ0aB1cD2eF3gH4iJ5kL6mN7oP8qR9sT0uV1wX2';
+const API_KEY = 'Qr6Ty8Pw3Nv1Az5Gh7Lc9BmK';
+const API_SECRET = 'S1dF2gH3jK4lM5nP6qR7tV8wX9yZ0aB1cD2eF3gH4iJ5kL6mN7oP8qR9sT0uV1wX2';
 const QUOTE_API_URL = 'http://gw.pineapple.co.za/api/v1/quote/quick-quote';
 
 Deno.serve(async (req: Request) => {
@@ -22,7 +23,7 @@ Deno.serve(async (req: Request) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_TOKEN}`,
+        'Authorization': `KEY=${API_KEY} SECRET=${API_SECRET}`,
       },
       body: JSON.stringify(requestData),
     });
