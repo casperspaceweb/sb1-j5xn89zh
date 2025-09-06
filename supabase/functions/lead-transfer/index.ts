@@ -47,13 +47,39 @@ Deno.serve(async (req: Request) => {
       throw new Error('Failed to store lead data');
     }
 
+    // Construct payload for external API - only include optional fields if they have values
+    const apiPayload: any = {
+      source: leadData.source || 'KodomBranchOne',
+      first_name: leadData.first_name,
+      last_name: leadData.last_name,
+      email: leadData.email,
+      contact_number: leadData.contact_number,
+    };
+
+    // Only include optional fields if they have non-empty values
+    if (leadData.id_number && leadData.id_number.trim() !== '') {
+      apiPayload.id_number = leadData.id_number;
+    }
+    
+    if (leadData.quote_id && leadData.quote_id.trim() !== '') {
+      apiPayload.quote_id = leadData.quote_id;
+    }
+    
+    if (leadData.application_user && leadData.application_user.trim() !== '') {
+      apiPayload.application_user = leadData.application_user;
+    }
+    
+    if (leadData.application_user_email && leadData.application_user_email.trim() !== '') {
+      apiPayload.application_user_email = leadData.application_user_email;
+    }
+
     const response = await fetch(LEAD_API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${API_TOKEN}`,
       },
-      body: JSON.stringify(leadData),
+      body: JSON.stringify(apiPayload),
     });
 
     if (!response.ok) {
