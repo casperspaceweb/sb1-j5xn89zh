@@ -52,7 +52,7 @@ export function LeadTransfer({ quoteData, quoteResponse, onBack }: LeadTransferP
         body: JSON.stringify({
           source: 'KodomBranchOne',
           ...leadData,
-          quote_id: quoteResponse?.quoteId || quoteResponse?.id,
+          quote_id: savedQuote.id,
         }),
       });
 
@@ -61,13 +61,6 @@ export function LeadTransfer({ quoteData, quoteResponse, onBack }: LeadTransferP
       }
 
       const result = await response.json();
-
-      // Save lead to database
-      await supabase.from('leads').insert({
-        quote_id: savedQuote.id,
-        ...leadData,
-        status: 'submitted',
-      });
 
       setIsSuccess(true);
     } catch (error) {
