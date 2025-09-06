@@ -52,7 +52,7 @@ export function LeadTransfer({ quoteData, quoteResponse, onBack }: LeadTransferP
         body: JSON.stringify({
           source: 'KodomBranchOne',
           ...leadData,
-          quote_id: savedQuote.id,
+          quote_id: quoteResponse?.quoteId || quoteResponse?.id,
         }),
       });
 
