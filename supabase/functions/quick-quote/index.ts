@@ -1,8 +1,7 @@
 import { corsHeaders } from '../_shared/cors.ts';
 import { createClient } from 'npm:@supabase/supabase-js@2.57.0';
 
-const API_KEY = Deno.env.get('PINEAPPLE_QUICK_QUOTE_API_KEY') ?? '';
-const API_SECRET = Deno.env.get('PINEAPPLE_QUICK_QUOTE_API_SECRET') ?? '';
+const API_TOKEN = 'KEY=Qr6Ty8Pw3Nv1Az5Gh7Lc9BmK SECRET=S1dF2gH3jK4lM5nP6qR7tV8wX9yZ0aB1cD2eF3gH4iJ5kL6mN7oP8qR9sT0uV1wX2';
 const QUOTE_API_URL = 'http://gw.pineapple.co.za/api/v1/quote/quick-quote';
 
 // Initialize Supabase client
@@ -47,7 +46,7 @@ Deno.serve(async (req: Request) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer KEY=${API_KEY} SECRET=${API_SECRET}`,
+        'Authorization': `Bearer ${API_TOKEN}`,
       },
       body: JSON.stringify(requestData),
     });
