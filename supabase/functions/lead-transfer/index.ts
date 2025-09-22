@@ -1,7 +1,7 @@
 import { corsHeaders } from '../_shared/cors.ts';
 import { createClient } from 'npm:@supabase/supabase-js@2.57.0';
 
-const API_TOKEN = 'KEY=Qr6Ty8Pw3Nv1Az5Gh7Lc9BmK SECRET=S1dF2gH3jK4lM5nP6qR7tV8wX9yZ0aB1cD2eF3gH4iJ5kL6mN7oP8qR9sT0uV1wX2';
+const API_TOKEN = Deno.env.get('PINEAPPLE_LEAD_API_TOKEN') ?? '';
 const LEAD_API_URL = 'http://gw.pineapple.co.za/users/motor_lead';
 
 // Initialize Supabase client
