@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowLeft, Shield } from 'lucide-react';
 import { AddressData } from './QuoteForm';
+import { AddressAutocomplete } from './AddressAutocomplete';
 
 interface AddressDetailsProps {
   data: AddressData;
@@ -31,12 +32,19 @@ export function AddressDetails({ data, onChange, onGetQuote, onBack, isLoading }
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Address Line <span className="text-red-500">*</span>
             </label>
-            <input
-              type="text"
+            <AddressAutocomplete
               value={data.addressLine}
-              onChange={(e) => onChange({ addressLine: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="123 Main Street"
+              onChange={(value) => onChange({ addressLine: value })}
+              onAddressSelect={(address) => {
+                onChange({
+                  addressLine: address.addressLine,
+                  suburb: address.suburb,
+                  postalCode: address.postalCode,
+                  latitude: address.latitude,
+                  longitude: address.longitude
+                });
+              }}
+              placeholder="Start typing your address..."
               required
             />
           </div>
@@ -49,10 +57,12 @@ export function AddressDetails({ data, onChange, onGetQuote, onBack, isLoading }
               type="text"
               value={data.suburb}
               onChange={(e) => onChange({ suburb: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
               placeholder="Sandton"
+              readOnly
               required
             />
+            <p className="text-xs text-gray-500 mt-1">Auto-populated from address selection</p>
           </div>
 
           <div>
@@ -63,10 +73,12 @@ export function AddressDetails({ data, onChange, onGetQuote, onBack, isLoading }
               type="number"
               value={data.postalCode || ''}
               onChange={(e) => onChange({ postalCode: parseInt(e.target.value) })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50"
               placeholder="2196"
+              readOnly
               required
             />
+            <p className="text-xs text-gray-500 mt-1">Auto-populated from address selection</p>
           </div>
 
         </div>
