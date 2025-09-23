@@ -62,6 +62,8 @@ export function LeadTransfer({ quoteData, quoteResponse, onBack }: LeadTransferP
 
       const result = await response.json();
 
+      console.log('Lead transfer response:', result);
+      
       setIsSuccess(true);
     } catch (error) {
       console.error('Lead transfer error:', error);
@@ -78,7 +80,9 @@ export function LeadTransfer({ quoteData, quoteResponse, onBack }: LeadTransferP
           <CheckCircle className="w-8 h-8 text-green-600" />
         </div>
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Lead Transferred Successfully!</h2>
-        <p className="text-gray-600 mb-8">Your lead has been submitted to Pineapple Insurance. They will contact you shortly.</p>
+        <p className="text-gray-600 mb-8">
+          Your lead has been submitted to Pineapple Insurance. They will contact you shortly.
+        </p>
         <button
           onClick={() => window.location.reload()}
           className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"

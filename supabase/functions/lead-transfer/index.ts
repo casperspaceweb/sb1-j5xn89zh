@@ -96,12 +96,12 @@ Deno.serve(async (req: Request) => {
       throw new Error(`API request failed: ${response.status} ${response.statusText} - ${responseText}`);
     }
 
-    let data;
+    let apiResponse;
     try {
-      data = JSON.parse(responseText);
+      apiResponse = JSON.parse(responseText);
     } catch (parseError) {
       console.error('Failed to parse response as JSON:', parseError);
-      data = { message: 'Response received but could not parse as JSON', rawResponse: responseText };
+      apiResponse = { message: 'Response received but could not parse as JSON', rawResponse: responseText };
     }
 
     // Update lead status to submitted
@@ -110,10 +110,15 @@ Deno.serve(async (req: Request) => {
       .update({ status: 'submitted' })
       .eq('id', savedLead.id);
 
-    console.log('Lead transfer successful:', data);
+    console.log('Lead transfer successful:', apiResponse);
 
     return new Response(
-      JSON.stringify({ ...data, leadId: savedLead.id }),
+      JSON.stringify({
+        success: apiResponse.success || true,
+        data: apiResponse.data || apiResponse,
+        leadId: savedLead.id,
+        message: 'Lead transferred successfully'
+      }),
       {
         headers: {
           ...corsHeaders,
