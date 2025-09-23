@@ -82,6 +82,10 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify(apiPayload),
     });
 
+    const responseText = await response.text();
+    console.log('API Response Status:', response.status);
+    console.log('API Response Body:', responseText);
+
     if (!response.ok) {
       // Update lead status to failed
       await supabase
@@ -89,16 +93,24 @@ Deno.serve(async (req: Request) => {
         .update({ status: 'failed' })
         .eq('id', savedLead.id);
         
-      throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+      throw new Error(`API request failed: ${response.status} ${response.statusText} - ${responseText}`);
     }
 
-    const data = await response.json();
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (parseError) {
+      console.error('Failed to parse response as JSON:', parseError);
+      data = { message: 'Response received but could not parse as JSON', rawResponse: responseText };
+    }
 
     // Update lead status to submitted
     await supabase
       .from('leads')
       .update({ status: 'submitted' })
       .eq('id', savedLead.id);
+
+    console.log('Lead transfer successful:', data);
 
     return new Response(
       JSON.stringify({ ...data, leadId: savedLead.id }),
