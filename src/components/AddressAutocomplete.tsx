@@ -100,7 +100,7 @@ export function AddressAutocomplete({
           type="text"
           value={inputValue}
           onChange={handleInputChange}
-          className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           placeholder={placeholder}
           required={required}
           autoComplete="off"
@@ -114,25 +114,26 @@ export function AddressAutocomplete({
       {isOpen && suggestions.length > 0 && (
         <div
           ref={dropdownRef}
-          className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-60 overflow-y-auto"
+          className="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg max-h-60 overflow-y-auto"
         >
           {suggestions.map((suggestion, index) => (
             <button
               key={index}
               type="button"
               onClick={() => handleSuggestionClick(suggestion)}
-              className="w-full px-4 py-3 text-left hover:bg-gray-50 focus:bg-gray-50 focus:outline-none border-b border-gray-100 last:border-b-0"
+              className="w-full px-4 py-3 text-left hover:bg-gray-50 dark:hover:bg-gray-700 focus:bg-gray-50 dark:focus:bg-gray-700 focus:outline-none border-b border-gray-100 dark:border-gray-700 last:border-b-0"
             >
               <div className="flex items-start space-x-2">
                 <MapPin className="text-gray-400 mt-0.5 flex-shrink-0" size={16} />
                 <div className="flex-1 min-w-0">
-                  <div className="text-sm font-medium text-gray-900 truncate">
+                  <div className="text-sm font-medium text-gray-900 dark:text-white truncate">
                     {suggestion.address.house_number && suggestion.address.road
                       ? `${suggestion.address.house_number} ${suggestion.address.road}`
                       : suggestion.address.road || formatDisplayName(suggestion)
                     }
                   </div>
                   <div className="text-xs text-gray-500 truncate">
+                  <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
                     {formatDisplayName(suggestion)}
                   </div>
                 </div>

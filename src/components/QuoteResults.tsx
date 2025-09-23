@@ -11,7 +11,7 @@ export function QuoteResults({ quoteResponse, onTransferLead, onNewQuote }: Quot
   if (!quoteResponse) {
     return (
       <div className="p-8 text-center">
-        <p className="text-gray-600">No quote data available.</p>
+        <p className="text-gray-600 dark:text-gray-300">No quote data available.</p>
       </div>
     );
   }
@@ -27,19 +27,20 @@ export function QuoteResults({ quoteResponse, onTransferLead, onNewQuote }: Quot
           <CheckCircle className="w-8 h-8 text-green-600" />
         </div>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Quote Generated Successfully!</h2>
-        <p className="text-gray-600">Here are your insurance quote details</p>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Quote Generated Successfully!</h2>
+        <p className="text-gray-600 dark:text-gray-300">Here are your insurance quote details</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
-          <h3 className="text-lg font-semibold text-blue-900 mb-2">Monthly Premium</h3>
+        <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
+          <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Monthly Premium</h3>
           <p className="text-3xl font-bold text-blue-600">
             R{typeof premium === 'number' ? Math.round(premium).toLocaleString() : premium}
           </p>
         </div>
 
-        <div className="bg-orange-50 p-6 rounded-lg border border-orange-200">
-          <h3 className="text-lg font-semibold text-orange-900 mb-2">Excess</h3>
+        <div className="bg-orange-50 dark:bg-orange-900/20 p-6 rounded-lg border border-orange-200 dark:border-orange-800">
+          <h3 className="text-lg font-semibold text-orange-900 dark:text-orange-100 mb-2">Excess</h3>
           <p className="text-3xl font-bold text-orange-600">
             R{typeof excess === 'number' ? excess.toLocaleString() : excess}
           </p>

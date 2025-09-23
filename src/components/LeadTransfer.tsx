@@ -96,21 +96,21 @@ export function LeadTransfer({ quoteData, quoteResponse, onBack }: LeadTransferP
   return (
     <div className="p-8">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Transfer Lead</h2>
-        <p className="text-gray-600">Complete your details to transfer this lead</p>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Transfer Lead</h2>
+        <p className="text-gray-600 dark:text-gray-300">Complete your details to transfer this lead</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               First Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={leadData.first_name}
               onChange={(e) => setLeadData({ ...leadData, first_name: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
               required
             />
           </div>
